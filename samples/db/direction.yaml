@@ -1,0 +1,42 @@
+---
+data:
+  -
+    name: tables
+    source: tables.yaml
+  -
+    name: description
+    source: description.yaml
+operations:
+  -
+   operation: fill
+   sheet: 表紙
+   cell: A1
+   value: data.description.project_name
+
+  -
+    operation: map_sheet
+    value: tables
+    sheet_name: this.label
+    template_sheet: テーブル
+    operations:
+      -
+        operation: fill
+        cell: B1
+        value: data.description.project_name
+      -
+        opertaion: fill
+        cell: E1
+        value: data.description.version
+      -
+        operation: map_rows
+        value: this.columns
+        header_row: 7
+        body_row: 8
+        map:
+          - data: name
+            template: カラム名
+          - data: type
+            template: 型
+          - data: description
+            template: 備考
+
