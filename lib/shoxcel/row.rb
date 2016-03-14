@@ -6,12 +6,12 @@ module Shoxcel
       @row = row
     end
 
-    def []= index
-
+    def size
+      @row.get_last_cell_num
     end
 
-    def []
-      Cell.new(row.get_cell(sel2) || row.create_cell(sel2))
+    def [] index
+      Cell.new(@row.get_cell(index) || @row.create_cell(index))
     end
   end
 end
