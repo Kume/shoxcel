@@ -16,6 +16,9 @@ require_relative 'shoxcel/book'
 require_relative 'shoxcel/sheet'
 require_relative 'shoxcel/row'
 require_relative 'shoxcel/cell'
+require_relative 'shoxcel/cell_index'
+require_relative 'shoxcel/value_parser'
+require_relative 'shoxcel/operation'
 
 module Shoxcel
 end

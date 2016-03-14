@@ -9,10 +9,9 @@ data:
 operations:
   -
    operation: fill
-   sheet: 表紙
+   sheet: '表紙'
    cell: A1
    value: data.description.project_name
-
   -
     operation: map_sheet
     value: tables
@@ -21,12 +20,9 @@ operations:
     operations:
       -
         operation: fill
-        cell: B1
-        value: data.description.project_name
-      -
-        opertaion: fill
-        cell: E1
-        value: data.description.version
+        map:
+          B1: data.description.project_name
+          E1: data.description.version
       -
         operation: map_rows
         value: this.columns

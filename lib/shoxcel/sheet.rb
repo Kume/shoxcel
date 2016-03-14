@@ -16,6 +16,11 @@ module Shoxcel
       Row.new(@sheet.get_row(index) || @sheet.create_row(index))
     end
 
+    def clone
+      workbook = @sheet.get_workbook
+      Sheet.new workbook.clone_sheet(workbook.get_sheet_index(@sheet))
+    end
+
     def insert_row index, source_row
       if index < @sheet.get_last_row_num
         @sheet.shift_rows index, @sheet.get_last_row_num, 1

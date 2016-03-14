@@ -23,7 +23,7 @@ module Shoxcel
         when Integer
           sheet  @book.getSheetAt(sheet_selector)
         else
-          raise 'invalid sheet selector'
+          raise "invalid sheet selector #{sheet_selector}"
       end
 
       sheet.set_force_formula_recalculation true
