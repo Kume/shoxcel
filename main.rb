@@ -21,7 +21,7 @@ Shoxcel::Book.open './samples/db/template.xlsx' do |book|
 
   operations = Shoxcel::Operation.create direction["operations"]
   operations.each do |operation|
-    operation.exec book
+    operation.exec book, {'description' => {'project_name' => 'shoxcelサンプル'}}
   end
 
   book.save_as './output.xlsx'

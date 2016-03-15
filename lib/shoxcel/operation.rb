@@ -1,16 +1,16 @@
 module Shoxcel
   class Operation
-    def self.create settings, sheet = nil
+    def self.create settings, sheet = nil, context = nil
       operations = []
       settings.each do |setting|
         operation_name = setting["operation"]
         case operation_name
           when "map_sheet"
             raise "invalid operation #{operation_name} in sheet context" if sheet
-            operations << MapSheetOperation.new(setting)
+            operations << MapSheetOperation.new(setting, context)
           when "fill"
             setting["sheet"] = sheet if sheet
-            operations << FillOperation.new(setting)
+            operations << FillOperation.new(setting, context)
           else
             raise "invalid operation name #{operation_name}"
         end
@@ -20,28 +20,31 @@ module Shoxcel
   end
 
   class FillOperation < Operation
-    def initialize params
+    def initialize params, context
       @params = params
       @cell = params["cell"]
       @value = params["value"]
       @map = params["map"]
       @sheet = params["sheet"]
+      @context = context
     end
 
-    def exec book
+    def exec book, data
       if @cell && @value
         cell_index = CellIndex.new @cell
-        book[@sheet][cell_index.row][cell_index.column].value = @value
+        parser = ValueParser.new data, @context
+        book[@sheet][cell_index.row][cell_index.column].value = parser.parse(@value)
       end
     end
   end
 
   class MapSheetOperation < Operation
-    def initialize params
+    def initialize params, context
       @params = params
+      @context = context
     end
 
-    def exec book
+    def exec book, data
 
     end
 

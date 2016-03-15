@@ -26,7 +26,7 @@ tbl_customer:
 tbl_order:
   label: 受注テーブル
   description: 注文を表す
-  columne:
+  columns:
     -
       name: id
       label: ID
