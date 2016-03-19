@@ -14,15 +14,16 @@ operations:
    value: data.description.project_name
   -
     operation: map_sheet
-    value: tables
+    value: data.tables
     sheet_name: this.label
     template_sheet: テーブル
     operations:
       -
         operation: fill
-        map:
+        values:
           B1: data.description.project_name
           E1: data.description.version
+          B2: key
       -
         operation: map_rows
         value: this.columns

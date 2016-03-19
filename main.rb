@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# encoding: utf-8
 
 require 'java'
 
@@ -7,9 +7,7 @@ require_relative 'lib/shoxcel'
 
 require 'yaml'
 
-data = File.read('./samples/db/direction.yaml')
-direction = YAML::load(data)
-
+direction = YAML::load_file('./samples/db/direction.yaml')
 
 Shoxcel::Book.open './samples/db/template.xlsx' do |book|
   book['表紙'][0][1].value = 'test'
@@ -17,11 +15,16 @@ Shoxcel::Book.open './samples/db/template.xlsx' do |book|
   table_sheet.insert_row 8, table_sheet[7]
   table_sheet.insert_row 9, table_sheet[7]
   table_sheet.insert_row 10, table_sheet[7]
-  table_sheet.clone
+  # table_sheet.clone
 
-  operations = Shoxcel::Operation.create direction["operations"]
+  data = {
+      'description' => YAML::load_file('./samples/db/data1/description.yaml'),
+      'tables' => YAML::load_file('./samples/db/data1/tables.yaml')
+  }
+
+  operations = Shoxcel::Operation.create direction["operations"], data
   operations.each do |operation|
-    operation.exec book, {'description' => {'project_name' => 'shoxcelサンプル'}}
+    operation.exec book
   end
 
   book.save_as './output.xlsx'

@@ -3,7 +3,7 @@ module Shoxcel
   class ValueParser
     def initialize data, context = nil
       @data = data
-      @context = context
+      @context = context || []
     end
 
     def parse expression
@@ -15,11 +15,11 @@ module Shoxcel
           return get_path_value(@data, tokens[1..(-1)])
 
         when 'this'
-          raise 'can not use "key" in the context.' if @context == nil || @context.size == 0
+          raise 'can not use "this" in the context.' if @context.size == 0
           return get_path_value(@data, @context + tokens[1..(-1)])
 
         when 'key'
-          raise 'can not use "key" in the context.' if @context == nil || @context.size == 0
+          raise 'can not use "key" in the context.' if @context.size == 0
           return @context.last
 
         when 'string'
@@ -28,6 +28,20 @@ module Shoxcel
           else
             return ''
           end
+      end
+    end
+
+    def get_context expression
+      tokens = expression.split('.')
+      return context if tokens.size == 0
+
+      case tokens[0]
+        when 'data'
+          return tokens[1..(-1)]
+        when 'this'
+          return @context + tokens[1..(-1)]
+        else
+          raise ''
       end
     end
 

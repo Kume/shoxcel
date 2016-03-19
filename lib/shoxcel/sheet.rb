@@ -21,6 +21,20 @@ module Shoxcel
       Sheet.new workbook.clone_sheet(workbook.get_sheet_index(@sheet))
     end
 
+    def destroy
+      workbook = @sheet.get_workbook
+      Sheet.new workbook.remove_sheet_at(workbook.get_sheet_index(@sheet))
+    end
+
+    def name
+      @sheet.get_sheet_name
+    end
+
+    def name= n
+      workbook = @sheet.get_workbook
+      workbook.set_sheet_name workbook.get_sheet_index(@sheet), n
+    end
+
     def insert_row index, source_row
       if index < @sheet.get_last_row_num
         @sheet.shift_rows index, @sheet.get_last_row_num, 1
