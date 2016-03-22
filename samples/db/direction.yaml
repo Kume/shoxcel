@@ -30,10 +30,10 @@ operations:
         header_row: 7
         body_row: 8
         map:
-          - data: name
+          - data: this.name
             template: カラム名
-          - data: type
+          - data: this.type
             template: 型
-          - data: description
+          - data: this.description
             template: 備考
 

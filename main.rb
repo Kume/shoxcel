@@ -10,12 +10,6 @@ require 'yaml'
 direction = YAML::load_file('./samples/db/direction.yaml')
 
 Shoxcel::Book.open './samples/db/template.xlsx' do |book|
-  book['表紙'][0][1].value = 'test'
-  table_sheet = book['テーブル']
-  table_sheet.insert_row 8, table_sheet[7]
-  table_sheet.insert_row 9, table_sheet[7]
-  table_sheet.insert_row 10, table_sheet[7]
-  # table_sheet.clone
 
   data = {
       'description' => YAML::load_file('./samples/db/data1/description.yaml'),

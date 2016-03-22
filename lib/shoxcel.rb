@@ -19,6 +19,7 @@ require_relative 'shoxcel/cell'
 require_relative 'shoxcel/cell_index'
 require_relative 'shoxcel/value_parser'
 require_relative 'shoxcel/operation'
+require_relative 'shoxcel/enumerable_util'
 
 module Shoxcel
 end

@@ -11,17 +11,17 @@ module Shoxcel
     def value
       case @cell.get_cell_type
         when ::Cell::CELL_TYPE_BLANK
-          return source_cell.get_string_cell_value
-        when Cell::CELL_TYPE_BOOLEAN
-          return source_cell.get_boolean_cell_value
-        when Cell::CELL_TYPE_ERROR
-          return source_cell.get_error_cell_value
-        when Cell::CELL_TYPE_FORMULA
-          return source_cell.get_cell_formula
-        when Cell::CELL_TYPE_NUMERIC
-          return source_cell.get_numeric_cell_value
-        when Cell::CELL_TYPE_STRING
-          return source_cell.get_rich_string_cell_value
+          return @cell.get_string_cell_value
+        when ::Cell::CELL_TYPE_BOOLEAN
+          return @cell.get_boolean_cell_value
+        when ::Cell::CELL_TYPE_ERROR
+          return @cell.get_error_cell_value
+        when ::Cell::CELL_TYPE_FORMULA
+          return @cell.get_cell_formula
+        when ::Cell::CELL_TYPE_NUMERIC
+          return @cell.get_numeric_cell_value
+        when ::Cell::CELL_TYPE_STRING
+          return @cell.get_rich_string_cell_value
       end
     end
 
