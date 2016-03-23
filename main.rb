@@ -11,10 +11,7 @@ direction = YAML::load_file('./samples/db/direction.yaml')
 
 Shoxcel::Book.open './samples/db/template.xlsx' do |book|
 
-  data = {
-      'description' => YAML::load_file('./samples/db/data1/description.yaml'),
-      'tables' => YAML::load_file('./samples/db/data1/tables.yaml')
-  }
+  data = Shoxcel::DataLoader.load('./samples/db/data1', direction['data'])
 
   operations = Shoxcel::Operation.create direction["operations"], data
   operations.each do |operation|
