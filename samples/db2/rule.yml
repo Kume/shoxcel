@@ -1,0 +1,49 @@
+books:
+  - name:
+      from: template
+      to: "{{label}}.xlsx"
+    type: map
+    data: _g.table_groups
+    sheets:
+      - name: 表紙
+        areas:
+          - type: replace
+            replace_map:
+              title:
+                template: "{{label}}機能 API仕様書"
+
+      - name:
+          from: テーブル
+          to: "{{label}}"
+        type: map
+        data: tables
+        areas:
+          - type: replace
+            replace_map:
+              header_project_name: "{{ _g.common.project_name }}"
+              header_table_name: "{{ _key }}"
+              header_version: "{{ _g.common.version }}"
+              header_created_at: "{{ _g.common.created_at }}"
+              header_updated_at: "{{ _g.common.updated_at }}"
+          - type: table
+            data: columns
+            area:
+              top_left: columns_tl
+              bottom_right: columns_br
+            top_offset: 1
+            header_height: 1
+            bottom_offset: 1
+            column_map:
+              カラム名: "{{ name }}"
+              型: "{{ type }}"
+              'Not Null': "{{#nullable}}○{{/nullable}}"
+              備考: "{{ description }}"
+            type_name_column: カラム名
+#          - type: table
+#            data: indexes
+#            area:
+#              top_left: indexes_tl
+#              bottom_right: indexes_br
+#            top_offset: 1
+#            header_height: 1
+#            bottom_offset: 1

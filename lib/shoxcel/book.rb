@@ -21,7 +21,7 @@ module Shoxcel
         when String
           sheet = @book.getSheet(sheet_selector)
         when Integer
-          sheet  @book.getSheetAt(sheet_selector)
+          sheet = @book.getSheetAt(sheet_selector)
         else
           raise "invalid sheet selector #{sheet_selector}"
       end
@@ -40,6 +40,14 @@ module Shoxcel
 
     def close
       @input_file.close
+    end
+
+    def raw
+      @book
+    end
+
+    def clone
+      Book.new(@path)
     end
   end
 end

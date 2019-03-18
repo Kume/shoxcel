@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
 require 'java'
-
-Dir.glob(File.expand_path('../poi', __FILE__) + '/**/*.jar').each do |jar|
-  puts jar
-  require jar
-end
+require 'jbundler'
 
 java_import java.io.FileInputStream
 java_import java.io.FileOutputStream
 java_import org.apache.poi.ss.usermodel.WorkbookFactory
 java_import org.apache.poi.ss.usermodel.DataFormatter
 java_import org.apache.poi.ss.usermodel.Cell
+java_import org.apache.poi.ss.usermodel.CellType
 
 require_relative 'shoxcel/book'
 require_relative 'shoxcel/sheet'

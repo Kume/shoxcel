@@ -1,0 +1,12 @@
+---
+:runtime:
+- org.apache.xmlbeans:xmlbeans:jar:2.6.0
+- org.yaml:snakeyaml:jar:1.18
+- org.apache.poi:poi-ooxml:jar:3.17
+- org.apache.poi:poi-ooxml-schemas:jar:3.17
+- org.apache.poi:poi:jar:3.17
+- jline:jline:jar:2.11
+- org.apache.commons:commons-collections4:jar:4.1
+- commons-codec:commons-codec:jar:1.10
+- stax:stax-api:jar:1.0.1
+- com.github.virtuald:curvesapi:jar:1.04

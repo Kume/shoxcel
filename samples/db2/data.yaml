@@ -1,0 +1,75 @@
+---
+common:
+  project_name: shoxcelサンプル
+  version: 1.0
+  created_at: 2016-03-12
+  updated_at: 2016-03-13
+table_groups:
+  customer:
+    label: 顧客管理
+    tables:
+      tbl_customer:
+        label: 顧客テーブル
+        description:
+        columns:
+          -
+            name: id
+            label: ID
+            type: int(11) auto_increment
+            nullable: false
+          -
+            name: name
+            label: 名前
+            type: varchar(64)
+            nullable: false
+          -
+            name: email
+            label: メールアドレス
+            type: varchar(255)
+            nullable: false
+          -
+            name: phone_number
+            label: 電話番号
+            type: varchar(255)
+            nullable: true
+          -
+            name: status
+            label: ステータス
+            type: smaillint(6)
+            description: 1:仮会員 2:本会員
+  order:
+    label: 受注管理
+    tables:
+      tbl_order:
+        label: 受注テーブル
+        description: 注文を表す
+        columns:
+          -
+            name: id
+            label: ID
+            type: int(11) auto_increment
+            nullable: false
+          -
+            name: created_at
+            label: 作成日時
+            type: datetime
+            nullable: false
+      tbl_order_item:
+        label: 受注明細テーブル
+        description: 注文を表す
+        columns:
+          - name: id
+            label: ID
+            type: int(11) auto_increment
+            nullable: false
+          - name: order_id
+            label: ID
+            type: int(11)
+            nullable: false
+          - name: created_at
+            label: 作成日時
+            type: datetime
+            nullable: false
+        - indexes:
+          - name: ix_order_id
+

@@ -133,7 +133,7 @@ module Shoxcel
         unless @row_values.empty?
           header_map = {}
           @row_values.first.keys.each do |key|
-            header_map[key] = header.find_by_text(key)
+            header_map[key] = header.find_index_by_text(key)
           end
 
           @row_values.reverse.each do |row_data|
@@ -147,7 +147,7 @@ module Shoxcel
       end
 
       @column_value_map.each do |key, map|
-        row_index = header.find_by_text(key)
+        row_index = header.find_index_by_text(key)
         puts "key = #{key}, row_index = #{row_index}"
       end
 

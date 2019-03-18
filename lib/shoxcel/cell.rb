@@ -10,18 +10,24 @@ module Shoxcel
 
     def value
       case @cell.get_cell_type
-        when ::Cell::CELL_TYPE_BLANK
-          return @cell.get_string_cell_value
-        when ::Cell::CELL_TYPE_BOOLEAN
-          return @cell.get_boolean_cell_value
-        when ::Cell::CELL_TYPE_ERROR
-          return @cell.get_error_cell_value
-        when ::Cell::CELL_TYPE_FORMULA
-          return @cell.get_cell_formula
-        when ::Cell::CELL_TYPE_NUMERIC
-          return @cell.get_numeric_cell_value
-        when ::Cell::CELL_TYPE_STRING
-          return @cell.get_rich_string_cell_value
+      when ::Cell::CELL_TYPE_BLANK
+      # when ::CellType::BLANK
+        return nil
+      when ::Cell::CELL_TYPE_BOOLEAN
+      # when ::CellType::BOOLEAN
+        return @cell.get_boolean_cell_value
+      when ::Cell::CELL_TYPE_ERROR
+      # when ::CellType::ERROR
+        return @cell.get_error_cell_value
+      when ::Cell::CELL_TYPE_FORMULA
+      # when ::CellType::FORMULA
+        return @cell.get_cell_formula
+      when ::Cell::CELL_TYPE_NUMERIC
+      # when ::CellType::NUMERIC
+        return @cell.get_numeric_cell_value
+      when ::Cell::CELL_TYPE_STRING
+      # when ::CellType::STRING
+        return @cell.get_rich_string_cell_value
       end
     end
 
@@ -38,6 +44,14 @@ module Shoxcel
       @cell.set_hyperlink hyperlink if (hyperlink = source.cell.get_hyperlink)
       @cell.set_cell_type source.cell.get_cell_type
       return self
+    end
+
+    def row_index
+      @cell.get_row_index
+    end
+
+    def column_index
+      @cell.get_column_index
     end
   end
 end
