@@ -33,6 +33,7 @@ module Shoxcel
         SheetTemplate.create(sheet)
       end
       @data = definition['data']
+      @data_context = definition['data_context']
     end
 
     def name_from
@@ -67,26 +68,9 @@ module Shoxcel
       end
     end
 
-    def each_data(data)
-      case data
-      when Array
-        data.each do |value|
-          template_data = Util.make_template_data(value, data)
-          yield template_data, value
-        end
-      when Hash
-        data.each do |key, value|
-          template_data = Util.make_template_data(value, data, key: key)
-          yield template_data, value
-        end
-      else
-        raise "Invalid data type #{data.class} for MapBookTemplate"
-      end
-    end
-
     def apply(book, data, global, out_dir)
       data = @data ? data.dig(*@data.split('.')) : data['_d']
-      Util.each_template_data(data, global) do |template_data|
+      Util.each_template_data(data, global, context_name: @data_context) do |template_data|
         output_name = Mustache.render(name_to, template_data)
         mapped_book = book.clone
         SheetTemplate.apply(mapped_book, @sheets, template_data, global)

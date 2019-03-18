@@ -99,19 +99,14 @@ module Shoxcel
         end
       end
 
-      puts 'template_row_count', template_row_count
-
       (0...@top_offset).each do
-        puts "remove row 1 #{top_index}"
         sheet.remove_row(top_index)
       end
       (0...template_row_count).each do
-        puts "remove row 2 #{top_index + @header_height}"
         sheet.remove_row(top_index + @header_height)
       end
       bottom_index = target[:bottom_right].row_index - @bottom_offset + 1
       (0...@bottom_offset).each do
-        puts "remove row 3 #{bottom_index}"
         sheet.remove_row(bottom_index)
       end
     end

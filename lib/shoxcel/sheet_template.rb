@@ -29,6 +29,7 @@ module Shoxcel
         AreaTemplate.create(area)
       end
       @data = definition['data']
+      @data_context = definition['data_context']
     end
 
     def name_from
@@ -58,8 +59,9 @@ module Shoxcel
     end
 
     def apply(sheet, data, global)
+      context = data['_c']
       data = @data ? data.dig(*@data.split('.')) : data['_d']
-      Util.each_template_data(data, global) do |template_data|
+      Util.each_template_data(data, global, context: context, context_name: @data_context) do |template_data|
         output_name = Mustache.render(name_to, template_data)
         mapped_sheet = sheet.clone
         AreaTemplate.apply(mapped_sheet, @areas, template_data, global)
