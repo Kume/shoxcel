@@ -52,6 +52,27 @@ module Shoxcel
     def initialize(definition)
       super
     end
+
+    def name_to
+      case @name
+      when String
+        return @name
+      when Hash
+        return @name['to']
+      else
+        raise "invalid book name type #{@name}"
+      end
+    end
+
+    def apply(book, data, global, out_dir)
+      context = data['_c']
+      data = @data ? data.dig(*@data.split('.')) : data['_d']
+      template_data = Util.make_template_data(data, global, context: context)
+      output_name = Mustache.render(name_to, template_data)
+      output_book = book.clone
+      SheetTemplate.apply(output_book, @sheets, template_data, global)
+      output_book.save_as File.join(out_dir, output_name)
+    end
   end
 
   class MapBookTemplate < BookTemplate

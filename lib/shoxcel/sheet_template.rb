@@ -77,7 +77,10 @@ module Shoxcel
     end
 
     def apply(sheet, data, global)
-      # TODO
+      context = data['_c']
+      data = @data ? data.dig(*@data.split('.')) : data['_d']
+      template_data = Util.make_template_data(data, global, context: context)
+      AreaTemplate.apply(sheet, @areas, template_data, global)
     end
   end
 end
