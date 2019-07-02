@@ -69,7 +69,11 @@ module Shoxcel
       header_row = sheet[header_row_index]
       column_cells = {}
       @column_map.each do |k, v|
-        cell = header_row.find_cell_by_text_or_fail(k)
+        if Integer === k
+          cell = header_row[k + top_left.column_index]
+        else
+          cell = header_row.find_cell_by_text_or_fail(k)
+        end
         column_cells[k] = cell
       end
       default_row = sheet[header_row_index + @header_height]
